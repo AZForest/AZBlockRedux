@@ -1,0 +1,38 @@
+.Layout {
+    background-color: #002b36;
+}
+
+.Layout h4 {
+    color: white;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.MidContainer {
+    display: flex;
+    background-color: cadetblue;
+    width: 75%;
+    margin: 0 auto;
+}
+
+.StartButtonContainer {
+    transform: translateX(50%);
+    margin-right: 210px;
+}
+
+.StartButton, .StopButton {
+    margin: 0 5px;
+    height: 40px;
+    width: 100px;
+    font-size: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    border: none;
+}
+
+.StartButton:hover, .StopButton:hover {
+    background-color: aquamarine;
+    transform: scale(1.1);
+    cursor: pointer;
+}

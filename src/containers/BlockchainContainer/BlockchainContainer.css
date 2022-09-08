@@ -1,0 +1,7 @@
+.BlockchainContainer {
+    height: 50px;
+    width: 800px;
+    display: flex;
+    background-color: #093642;
+    margin: 10px auto;
+}

@@ -1,0 +1,28 @@
+.InformationBar {
+    background-color: #839496;
+    height: 600px;
+    width: 200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.InformationBar h3 {
+    color: white;
+    font-size: 24px;
+    margin: 40px auto;
+    background-color: #6610f2;
+    padding: 10px 0;
+}
+
+.InformationBar h3 span {
+    font-size: 40px;
+}
+
+.InformationBar p {
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+}

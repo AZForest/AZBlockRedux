@@ -1,0 +1,9 @@
+.NodeContainer {
+    margin: 0 auto;
+    width: 900px;
+    height: 600px;
+    background-color: #093642;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

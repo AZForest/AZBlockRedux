@@ -1,0 +1,51 @@
+.Node {
+    box-sizing: border-box;
+    height: 45%;
+    width: 45%;
+    background-color: #839496;
+    margin: 10px;  
+}
+
+.Node h3 {
+    color: white;
+    padding: 0 0px 0 40px;
+    margin: 10px 10px 0 0;
+}
+
+.GuessContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.sub-GuessContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ComputerImageContainer {
+    margin: 0;
+    width: 50%;
+}
+
+
+
+#Guess {
+    margin: 0 0 20px 0;
+    padding: 0;
+    text-align: center;
+    font-weight: 700;
+    font-size: 28px;
+}
+
+#Guess span {
+    color: white;
+    font-size: 34px;
+}
+
+#Mining {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
