@@ -2,7 +2,7 @@ import React, {useEffect, useState, useLayoutEffect, useRef } from "react";
 import './NodeContainer.css';
 import Node from '../../components/Node/Node';
 
-function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinnerNode, nonce, setNonce, nodes, setNodes, setHighestBTC, setModalActive, blocks, setBlocks}) {
+function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinnerNode, nonce, setNonce, nodes, setNodes, blocks, setBlocks, transactions, setTransactions}) {
     
     const [barProgress, setBarProgress] = useState(0);
     const [intervalId, setIntervalId] = useState(null);
@@ -31,11 +31,6 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
           setCountMounted(newVal);
         }
     }, [guesses]);
-
-    /*useEffect(() => {
-        checkGuesses();
-        setNonce(nonce + 1)
-    }, [guesses])*/
 
     const mine = () => {
         let i = 0
@@ -80,7 +75,6 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
             generateGuess(),
             generateGuess()
         ]
-        //console.log(array);
         setGuesses(array);
     }
 
@@ -92,10 +86,9 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
         }
         if (correctGuessIndex > -1) {
             setInProgress(false);
-            setNonce(0);
             setWinnerNode({
                 id: correctGuessIndex,
-                BTC: winnerNode.BTC + 0.014
+                BTC: winnerNode.BTC + 5
             })
             let currNodes = [...nodes];
             let winner = currNodes[correctGuessIndex];
@@ -104,17 +97,21 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
                 BTC: winner.BTC + 5
             }
             setNodes(currNodes);
+
+            let topTransactions = transactions.slice(0, 5);
+            
             
             let newBlock = {
                 address: address,
                 winnerIndex: correctGuessIndex,
-                nonce: nonce
+                nonce: nonce,
+                transactions: topTransactions
             }
             let currBlocks = [...blocks, newBlock];
-            console.log(currBlocks);
-            setHighestBTC(getHighestBTC());
+            //console.log(currBlocks);
             setBuilding(true);
             setTimeout(() => {
+                setTransactions(transactions.slice(5));
                 setBlocks(currBlocks);
                 setBuilding(false);
                 setInProgress(true);
@@ -125,22 +122,6 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
                 setModalActive(false)
             }, 5000);*/
         }
-    }
-
-    function getHighestBTC() {
-        let highest = {id: -1, BTC: -1};
-        nodes.forEach(node => {
-            //console.log(node);
-            if (node.BTC > highest.BCT) {
-                console.log("here");
-                highest = node;
-            }
-        })
-        /*if (highest.id === -1) highest = {
-            id: null, BTC: null
-        }*/
-        console.log(highest);
-        return highest;
     }
 
     return (

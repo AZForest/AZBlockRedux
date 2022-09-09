@@ -4,13 +4,6 @@ import ComputerImage from "../../assets/images/computerImage1.png";
 import ProgressBar from '../../components/UI/ProgressBar/ProgressBar';
 
 function Node({id, progress, buildProgress, inProgress, guess, mining, didWin, balance}) { 
-    const buildBlock = () => {
-
-    }
-    const winBorder = {
-        border: "5px solid #6610f2",
-        boxShadow: "0px 0px 20px #6610f2"
-    }
     const winBox = {
         backgroundColor: "#6610f2",
         boxShadow: "0px 0px 20px #6610f2"
@@ -25,7 +18,7 @@ function Node({id, progress, buildProgress, inProgress, guess, mining, didWin, b
                 </div>
                 
                 <div className="ComputerImageContainer">
-                    <img src={ComputerImage} height={180} width={180}/>
+                    <img src={ComputerImage} height={150} width={150}/>
                 </div>
                 
             </div>  

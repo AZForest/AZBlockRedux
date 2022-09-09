@@ -3,6 +3,7 @@ import './Layout.css';
 import NodeContainer from '../NodeContainer/NodeContainer';
 import BlockchainContainer from '../BlockchainContainer/BlockchainContainer';
 import InformationBar from '../InformationBar/InformationBar';
+import MempoolContainer from '../MempoolContainer/MempoolContainer';
 import Modal from '../../components/UI/Modal/Modal';
 
 function Layout() {
@@ -12,9 +13,9 @@ function Layout() {
         id: null,
         BTC: null
     });
-    const [highestBTC, setHighestBTC] = useState({
-        id: null,
-        BTC: null
+    const [highestFunds, setHighestFunds] = useState({
+        id: 0,
+        BTC: 0
     })
     const [nonce, setNonce] = useState(0);
     const [nodes, setNodes] = useState([
@@ -25,6 +26,7 @@ function Layout() {
     ])
     const [modalActive, setModalActive] = useState(false);
     const [blocks, setBlocks] = useState([])
+    const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
         if (inProgress) {
@@ -32,20 +34,26 @@ function Layout() {
         } 
     }, [inProgress])
 
+    useEffect(() => {
+        setHighestFunds(getHighestBTC());
+        setTimeout(() => {
+            setNonce(0);
+        }, 3000)
+    }, [nodes])
+
     function refreshTarget() {
         let temp = Math.floor(Math.random() * 10);
-        //setInProgress(true);
         setTarget(temp);
     }
 
     function getHighestBTC() {
-        let highest = {id: -1, BTC: -1};
+        let highest = {id: 0, BTC: 0};
+        let val = -1;
         nodes.forEach(node => {
-            if (node.BTC > highest.BCT) {
+            if (node.BTC > highest.BTC) {
                 highest = node;
             }
         })
-        //setHighestBTC(highest);
         return highest;
     }
 
@@ -68,7 +76,7 @@ function Layout() {
                 <InformationBar target={target} 
                                 winnerNode={winnerNode.id}
                                 nonce={nonce}
-                                highest={getHighestBTC()}/>
+                                highest={highestFunds}/>
                 <NodeContainer address={target} 
                         inProgress={inProgress} 
                         setInProgress={setInProgress}
@@ -78,16 +86,18 @@ function Layout() {
                         setNonce={setNonce}
                         nodes={nodes}
                         setNodes={setNodes}
-                        setHighestBTC={setHighestBTC}
                         setModalActive={setModalActive}
                         blocks={blocks}
-                        setBlocks={setBlocks}/>
+                        setBlocks={setBlocks}
+                        transactions={transactions}
+                        setTransactions={setTransactions}/>
             </div>
             
             <div className="StartButtonContainer">
                 <button className="StartButton" onClick={() => setInProgress(true)}>Start</button>
                 <button className="StopButton" onClick={() => setInProgress(false)}>Stop</button>
             </div>
+            <MempoolContainer inProgress={inProgress} transactions={transactions} setTransactions={setTransactions}/>
             <button onClick={() => toggleModal()}>1</button>
             <br/>
             <br/>

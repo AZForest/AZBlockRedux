@@ -7,7 +7,7 @@ function BlockchainContainer({winnerNode, blocks}) {
     const [blocksArray, setBlocksArray] = useState(blocks);
 
     useEffect(() => {
-        console.log(blocksArray);
+        //console.log(blocksArray);
         setBlocksArray(blocks);
     },[blocks])
 
@@ -15,10 +15,10 @@ function BlockchainContainer({winnerNode, blocks}) {
 
     return (
         <div className="BlockchainContainer">
-            {blocksArray.map(block => {
+            {blocksArray.map((block, index) => {
                 return (
-                <div className="block-row">
-                    <Block />
+                <div className="block-row" key={index} >
+                    <Block index={index} info={block}/>
                     <p className="arrow">-{'>'}</p>
                 </div>
                 )
