@@ -1,11 +1,11 @@
 import React from 'react';
 import './ProgressBar.css';
 
-function ProgressBar({progress}) {
+function ProgressBar({progress, bgColor, fillColor, textColor}) {
     const ParentDiv = {
         height: '20px',
         width: '300px',
-        backgroundColor: 'whitesmoke',
+        backgroundColor: bgColor,
         borderRadius: 40,
         margin: '10px auto'
       }
@@ -13,14 +13,14 @@ function ProgressBar({progress}) {
     const ChildDiv = {
         height: '100%',
         width: `${progress}%`,
-        backgroundColor: "#6610f2",
+        backgroundColor: fillColor,
         borderRadius: 40,
         textAlign: 'right'
     }
 
     const progresstext = {
         padding: 10,
-        color: 'white',
+        color: textColor,
         fontWeight: 900
       }
 

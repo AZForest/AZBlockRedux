@@ -47,5 +47,14 @@
     margin: 0;
     padding: 0;
     text-align: center;
+    font-weight: 700;
+}
+
+#AddingNewBlock {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: white;
+    font-weight: bold;
 }
 
