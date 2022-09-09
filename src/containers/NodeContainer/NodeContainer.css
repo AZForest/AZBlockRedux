@@ -1,7 +1,7 @@
 .NodeContainer {
     margin: 0 auto;
     width: 900px;
-    height: 600px;
+    height: 500px;
     background-color: #093642;
     display: flex;
     flex-wrap: wrap;

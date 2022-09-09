@@ -4,6 +4,8 @@
     background-color: #6610f2;
     margin: auto;
     z-index: 3;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -30,3 +32,7 @@
     z-index: 2;
 }
 
+#BlockWinner {
+    color: white;
+    margin: auto;
+}

@@ -1,60 +1,68 @@
 .Node {
     box-sizing: border-box;
-    height: 45%;
-    width: 45%;
-    background-color: #839496;
+    height: 140px;
+    width: 260px;
+    /*background-color: #839496;*/
+    background-color: rgba(131,147,150, 0.4);
     margin: 10px;  
+    border-radius: 5px;
 }
 
 .Node h3 {
-    color: white;
-    padding: 0 0px 0 40px;
-    margin: 10px 10px 0 0;
+    color: black;
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
 }
 
 .GuessContainer {
     display: flex;
     justify-content: center;
+    margin: 10px 0;
 }
 
 .sub-GuessContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
 }
 
 .ComputerImageContainer {
     margin: 0;
     width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.ComputerImageContainer img {
+    margin: 0 auto;
 }
 
 
 
 #Guess {
-    margin: 0 0 20px 0;
+    margin: 0 0 10px 0;
     padding: 0;
     text-align: center;
     font-weight: 700;
-    font-size: 28px;
+    font-size: 20px;
 }
 
 #Guess span {
     color: white;
-    font-size: 34px;
+    font-size: 26px;
 }
 
-#Mining {
+#Mining, #AddingNewBlock {
     margin: 0;
     padding: 0;
     text-align: center;
     font-weight: 700;
+    font-size: 12px;
 }
 
 #AddingNewBlock {
-    margin: 0;
-    padding: 0;
-    text-align: center;
     color: white;
-    font-weight: bold;
 }
 

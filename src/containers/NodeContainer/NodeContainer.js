@@ -6,7 +6,7 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
     
     const [barProgress, setBarProgress] = useState(0);
     const [intervalId, setIntervalId] = useState(null);
-    const [guesses, setGuesses] = useState([0, 0, 0, 0]);
+    const [guesses, setGuesses] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
     const [countMounted, setCountMounted] = useState(0);
     const [building, setBuilding] = useState(false)
     const [buildBarProgress, setBuildBarProgress] = useState(0);
@@ -65,7 +65,7 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
     }
 
     const generateGuess = () => {
-        return Math.floor(Math.random() * 10);
+        return Math.floor(Math.random() * 20);
     }
 
     const generateGuesses = () => {
@@ -73,7 +73,12 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
             generateGuess(),
             generateGuess(),
             generateGuess(),
-            generateGuess()
+            generateGuess(),
+            generateGuess(),
+            generateGuess(),
+            generateGuess(),
+            generateGuess(),
+            generateGuess(),
         ]
         setGuesses(array);
     }
@@ -126,10 +131,20 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
 
     return (
         <div className="NodeContainer">
-            <Node id={0} progress={barProgress} inProgress={inProgress} buildProgress={buildBarProgress} guess={guesses[0]} mining={inProgress} didWin={0 == winnerNode.id} balance={nodes[0].BTC}/>
+            {/*<Node id={0} progress={barProgress} inProgress={inProgress} buildProgress={buildBarProgress} guess={guesses[0]} mining={inProgress} didWin={0 == winnerNode.id} balance={nodes[0].BTC}/>
             <Node id={1} progress={barProgress} inProgress={inProgress} buildProgress={buildBarProgress} guess={guesses[1]} mining={inProgress} didWin={1 == winnerNode.id} balance={nodes[1].BTC}/>
             <Node id={2} progress={barProgress} inProgress={inProgress} buildProgress={buildBarProgress} guess={guesses[2]} mining={inProgress} didWin={2 == winnerNode.id} balance={nodes[2].BTC}/>
-            <Node id={3} progress={barProgress} inProgress={inProgress} buildProgress={buildBarProgress} guess={guesses[3]} mining={inProgress} didWin={3 == winnerNode.id} balance={nodes[3].BTC}/>
+            <Node id={3} progress={barProgress} inProgress={inProgress} buildProgress={buildBarProgress} guess={guesses[3]} mining={inProgress} didWin={3 == winnerNode.id} balance={nodes[3].BTC}/>*/}
+            {nodes.map((n, index) => {
+                return <Node id={index} 
+                        progress={barProgress} 
+                        inProgress={inProgress} 
+                        buildProgress={buildBarProgress} 
+                        guess={guesses[index]} 
+                        mining={inProgress} 
+                        didWin={index == winnerNode.id} 
+                        balance={nodes[index].BTC}/>
+            })}
         </div>
     )
 }

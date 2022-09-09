@@ -23,6 +23,11 @@ function Layout() {
         {id: 1, BTC: 0},
         {id: 2, BTC: 0},
         {id: 3, BTC: 0},
+        {id: 4, BTC: 0},
+        {id: 5, BTC: 0},
+        {id: 6, BTC: 0},
+        {id: 7, BTC: 0},
+        {id: 8, BTC: 0},
     ])
     const [modalActive, setModalActive] = useState(false);
     const [blocks, setBlocks] = useState([])
@@ -42,7 +47,7 @@ function Layout() {
     }, [nodes])
 
     function refreshTarget() {
-        let temp = Math.floor(Math.random() * 10);
+        let temp = Math.floor(Math.random() * 20);
         setTarget(temp);
     }
 
@@ -70,7 +75,7 @@ function Layout() {
                             winnerNode={winnerNode}
                             target={target}
                             nonce={nonce}/> : ""}
-            <h4>Blockchain Simulator</h4>
+            <h4 id="title">Blockchain Simulator</h4>
             <BlockchainContainer winnerNode={winnerNode} blocks={blocks}/>
             <div className="MidContainer">
                 <InformationBar target={target} 

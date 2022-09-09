@@ -8,7 +8,7 @@ function Block({index, info}) {
     return (
         <>
             <div className="Block" onClick={() => setActiveInfo(!activeInfo)}>
-
+                <div id="BlockWinner">{info.winnerIndex + 1}</div>
             </div>
             {activeInfo ? 
             <div className="BlockBg">

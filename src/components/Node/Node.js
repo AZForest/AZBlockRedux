@@ -10,15 +10,15 @@ function Node({id, progress, buildProgress, inProgress, guess, mining, didWin, b
     }
     return (
         <div className="Node" style={didWin && !inProgress ? winBox : {border: "none"}}>
-            <h3>Node {id + 1} {didWin && !inProgress ? "Wins!" : ""}</h3>
             <div className="GuessContainer">
                 <div className="sub-GuessContainer">
+                    <h3>Node {id + 1} {didWin && !inProgress ? "Wins!" : ""}</h3>
                     <div id="Guess">Guess: <span>{guess}</span></div>
-                    <div style={{fontWeight: "700"}}>Total BTC: {balance}</div>
+                    <div style={{fontWeight: "700", fontSize: "12px"}}>Total BTC: {balance}</div>
                 </div>
                 
                 <div className="ComputerImageContainer">
-                    <img src={ComputerImage} height={150} width={150}/>
+                    <img src={ComputerImage} height={75} width={75}/>
                 </div>
                 
             </div>  
