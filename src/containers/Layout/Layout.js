@@ -11,8 +11,10 @@ function Layout() {
     const [inProgress, setInProgress] = useState(false);
     const [winnerNode, setWinnerNode] = useState({
         id: null,
-        BTC: null
+        BTC: null,
+        previousHash: null
     });
+    //const [winnerNode, setWinnerNode] = useState(null);
     const [highestFunds, setHighestFunds] = useState({
         id: 0,
         BTC: 0

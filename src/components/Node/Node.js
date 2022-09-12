@@ -2,11 +2,12 @@ import React from "react";
 import './Node.css';
 import ComputerImage from "../../assets/images/computerImage1.png";
 import ProgressBar from '../../components/UI/ProgressBar/ProgressBar';
+import colors from '../../utility/GlobalVars';
 
 function Node({id, progress, buildProgress, inProgress, guess, mining, didWin, balance}) { 
     const winBox = {
-        backgroundColor: "#6610f2",
-        boxShadow: "0px 0px 20px #6610f2"
+        backgroundColor: colors.primary,
+        boxShadow: "0px 0px 20px " + colors.primary
     }
     return (
         <div className="Node" style={didWin && !inProgress ? winBox : {border: "none"}}>
@@ -24,8 +25,8 @@ function Node({id, progress, buildProgress, inProgress, guess, mining, didWin, b
             </div>  
             {didWin && !inProgress ? <p id="AddingNewBlock">Adding new Block ...</p> : <p id="Mining">Mining...</p>}
             {didWin && !inProgress ? 
-            <ProgressBar progress={buildProgress} bgColor={"#6610f2"} fillColor={"white"} textColor={"#6610f2"}/> : 
-            <ProgressBar progress={progress} bgColor={"whitesmoke"} fillColor={"#6610f2"} textColor={"white"}/>}
+            <ProgressBar progress={buildProgress} bgColor={colors.primary} fillColor={"gainsboro"} textColor={colors.primary}/> : 
+            <ProgressBar progress={progress} bgColor={"gainsboro"} fillColor={colors.primary} textColor={"gainsboro"}/>}
         </div>
     )
 }

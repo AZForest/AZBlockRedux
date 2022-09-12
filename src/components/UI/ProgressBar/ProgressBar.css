@@ -1,5 +1,5 @@
 .ProgressBar {
-    width: 150px;
+    width: 50px;
     margin: 10px auto;
     height: 10px;
     background-color: aquamarine;
@@ -8,4 +8,7 @@
 .progress-text {
     height: 100px;
     width: 100px;
+    padding: 0 5px !important;
+    position: relative;
+    top: -4px;
 }

@@ -1,11 +1,16 @@
 .Node {
     box-sizing: border-box;
-    height: 140px;
-    width: 260px;
+    height: 170px;
+    width: 250px;
     /*background-color: #839496;*/
     background-color: rgba(131,147,150, 0.4);
     margin: 10px;  
     border-radius: 5px;
+}
+
+.Node:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0 10px rgb(21,96,137);
 }
 
 .Node h3 {
@@ -18,7 +23,7 @@
 .GuessContainer {
     display: flex;
     justify-content: center;
-    margin: 10px 0;
+    margin: 20px 0;
 }
 
 .sub-GuessContainer {
@@ -50,7 +55,7 @@
 }
 
 #Guess span {
-    color: white;
+    color: gainsboro;
     font-size: 26px;
 }
 
@@ -63,6 +68,6 @@
 }
 
 #AddingNewBlock {
-    color: white;
+    color: gainsboro;
 }
 

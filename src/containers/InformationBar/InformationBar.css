@@ -1,21 +1,21 @@
 .InformationBar {
     /*background-color: #839496;*/
     background-color: rgba(131,147,150, 0.4);
-    height: 500px;
+    height: 570px;
     width: 180px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    color: gainsboro;
 }
 
 .InformationBar h3 {
-    color: white;
-    font-size: 24px;
+    font-size: 18px;
     margin: 40px auto;
-    background-color: #6610f2;
-    padding: 10px 0;
+    background-color: #258BD1;
+    padding: 10px 10px;
 }
 
 .InformationBar h3 span {
@@ -24,6 +24,5 @@
 
 .InformationBar p {
     font-size: 16px;
-    color: white;
     font-weight: bold;
 }

@@ -1,11 +1,16 @@
 .Block {
     width: 30px;
     height: 30px;
-    background-color: #6610f2;
-    margin: auto;
+    background-color: rgba(37,139,209, 1);
+    margin: auto 10px;
     z-index: 3;
     display: flex;
     justify-content: center;
+    border-radius: 5px;
+    font-weight: 700;
+}
+.Block:first-of-type {
+    margin-left: 20px;
 }
 
 
@@ -20,9 +25,10 @@
     z-index: 1;
 }
 .BlockInfo {
-    height: 300px;
+    height: 350px;
     width: 600px;
-    background-color: white;
+    color: white;
+    background-color: #093642;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -31,8 +37,59 @@
     font-weight: bold;
     z-index: 2;
 }
+.BlockInfo h2 {
+    margin: 5px auto 45px auto;
+    text-align: center;
+}
+
+.BlockTable {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 70px;
+    background-color: rgba(131,147,150, 0.1);
+}
+.BlockTable p {
+    margin: 10px;
+    font-size: 12px;
+}
 
 #BlockWinner {
     color: white;
     margin: auto;
+}
+
+#block-transactions {
+    margin: 10px 0 10px 40px;
+    padding: 0;
+    color: white;
+    text-align: left;
+}
+
+.Transactions-Div {
+    margin-top: 0;
+    background-color: rgba(131,147,150, 0.1);
+    height: 165px;
+    overflow: scroll;
+}
+
+.Transactions-Row {
+    display: flex;
+    font-size: 10px;
+}
+.Transactions-Row p {
+    margin: 10px 5px;
+}
+
+#block-x {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    font-size: 20px;
+}
+
+#block-x:hover {
+    transform: scale(1.3);
+    cursor: pointer;
 }

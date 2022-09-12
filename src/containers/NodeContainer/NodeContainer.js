@@ -4,9 +4,11 @@ import Node from '../../components/Node/Node';
 
 function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinnerNode, nonce, setNonce, nodes, setNodes, blocks, setBlocks, transactions, setTransactions}) {
     
+    const initialGuesses = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    
     const [barProgress, setBarProgress] = useState(0);
     const [intervalId, setIntervalId] = useState(null);
-    const [guesses, setGuesses] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    const [guesses, setGuesses] = useState(initialGuesses);
     const [countMounted, setCountMounted] = useState(0);
     const [building, setBuilding] = useState(false)
     const [buildBarProgress, setBuildBarProgress] = useState(0);
@@ -83,6 +85,33 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
         setGuesses(array);
     }
 
+    const resetGuesses = () => {
+        setGuesses(initialGuesses);
+    }
+
+    const computeHash = (prevHash, winIndex, transactions, timestamp) => {
+        //previous hash, winningIndex, transactionIds, timestamp
+        //index * sum(transactionIds) * timestamp
+        console.log(transactions)
+        let idSum = 0;
+        transactions.forEach(t => {
+            idSum += t.transactionId
+        });
+        //const idSum = transactions.reduce((a, b) => a.transactionId + b.transactionId);
+        const product = (winIndex + 1) * idSum * timestamp;
+        if (!prevHash) {
+            console.log("Null the first time");
+            return product.toString(16);
+        }
+        const prevHashToDecimal = parseInt(prevHash + "", 16);
+        // (prevhash * product) * 0.33
+        //console.log(prevHashToDecimal % 1000000000000000)
+        const preHex = prevHashToDecimal * product;
+        const newHash = preHex.toString(16);
+        //return newHash;
+        return product.toString(16);
+    }
+
     const checkGuesses = () => {
         let correctGuessIndex = -1;
         for (let i = 0; i < guesses.length; i++) {
@@ -91,23 +120,37 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
         }
         if (correctGuessIndex > -1) {
             setInProgress(false);
-            setWinnerNode({
-                id: correctGuessIndex,
-                BTC: winnerNode.BTC + 5
-            })
+
+            let topTransactions = transactions.slice(0, 10);
+            let timestamp = Date.now();
+            const prevWinner = winnerNode;
+            const newHash = computeHash(
+                prevWinner.hash, correctGuessIndex, topTransactions, timestamp);
+            
+            //console.log(prevWinner.hash);
+            console.log(newHash);
             let currNodes = [...nodes];
             let winner = currNodes[correctGuessIndex];
             currNodes[correctGuessIndex] = {
+                previousHash: prevWinner.hash,
+                hash: newHash,
                 id: winner.id,
                 BTC: winner.BTC + 5
             }
             setNodes(currNodes);
+            setWinnerNode({
+                previousHash: prevWinner.hash,
+                hash: newHash,
+                id: correctGuessIndex,
+                BTC: winner.BTC + 5,
+            })
 
-            let topTransactions = transactions.slice(0, 5);
+            
             
             
             let newBlock = {
-                address: address,
+                prevAddress: prevWinner.hash,
+                address: newHash,
                 winnerIndex: correctGuessIndex,
                 nonce: nonce,
                 transactions: topTransactions
@@ -116,10 +159,11 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
             //console.log(currBlocks);
             setBuilding(true);
             setTimeout(() => {
-                setTransactions(transactions.slice(5));
+                setTransactions(transactions.slice(10));
                 setBlocks(currBlocks);
                 setBuilding(false);
                 setInProgress(true);
+                resetGuesses();
             }, 3000)
 
             /*setModalActive(true);
@@ -136,7 +180,8 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
             <Node id={2} progress={barProgress} inProgress={inProgress} buildProgress={buildBarProgress} guess={guesses[2]} mining={inProgress} didWin={2 == winnerNode.id} balance={nodes[2].BTC}/>
             <Node id={3} progress={barProgress} inProgress={inProgress} buildProgress={buildBarProgress} guess={guesses[3]} mining={inProgress} didWin={3 == winnerNode.id} balance={nodes[3].BTC}/>*/}
             {nodes.map((n, index) => {
-                return <Node id={index} 
+                return <Node key={index}
+                        id={index} 
                         progress={barProgress} 
                         inProgress={inProgress} 
                         buildProgress={buildBarProgress} 

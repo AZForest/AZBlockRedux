@@ -18,27 +18,29 @@
 .MidContainer {
     display: flex;
     background-color: #093642;
-    width: 1070px;
-    margin: 0 auto;
+    width: 1000px;
+    margin: 20px auto 0 auto;
 }
 
 .StartButtonContainer {
+    margin: 20px auto;
     transform: translateX(50%);
     margin-right: 210px;
 }
 
 .StartButton, .StopButton {
-    margin: 10px 5px 0 5px;
+    margin: 0px 5px 0 5px;
     height: 30px;
     width: 100px;
     font-size: 18px;
     border-radius: 10px;
     font-weight: bold;
     border: none;
+    background-color: gainsboro;
 }
 
 .StartButton:hover, .StopButton:hover {
-    background-color: #6610f2;
+    background-color: rgb(37,139,208);
     transform: scale(1.1);
     cursor: pointer;
 }

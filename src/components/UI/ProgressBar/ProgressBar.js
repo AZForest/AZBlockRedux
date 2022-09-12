@@ -4,7 +4,7 @@ import './ProgressBar.css';
 function ProgressBar({progress, bgColor, fillColor, textColor}) {
     const ParentDiv = {
         height: '15px',
-        width: '250px',
+        width: '230px',
         backgroundColor: bgColor,
         borderRadius: 40,
         margin: '10px auto'
@@ -15,7 +15,9 @@ function ProgressBar({progress, bgColor, fillColor, textColor}) {
         width: `${progress}%`,
         backgroundColor: fillColor,
         borderRadius: 40,
-        textAlign: 'right'
+        textAlign: 'right',
+        position: "relative"
+        
     }
 
     const progresstext = {

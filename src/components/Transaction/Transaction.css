@@ -3,8 +3,12 @@
     height: 20px;
     background-color: #002b36;
     margin: 5px auto;
-    color: white;
+    color: gainsboro;
     display: flex;
+    font-size: 12px;
+    justify-content: space-between;
+    padding: auto 5px;
+    border-radius: 5px;
 }
 
 .Transaction p {

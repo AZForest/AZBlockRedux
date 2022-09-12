@@ -1,26 +1,46 @@
 import React, {useState} from 'react';
 import './Block.css';
+import colors from '../../../utility/GlobalVars'
 
 function Block({index, info}) {
 
     const [activeInfo, setActiveInfo] = useState(false);
 
+    const backgroundColor = {
+        backgroundColor: colors.primary
+    }
+
     return (
         <>
-            <div className="Block" onClick={() => setActiveInfo(!activeInfo)}>
+            <div className="Block" onClick={() => setActiveInfo(!activeInfo)} style={backgroundColor}>
                 <div id="BlockWinner">{info.winnerIndex + 1}</div>
             </div>
             {activeInfo ? 
-            <div className="BlockBg">
+            <div className="BlockBg" onClick={activeInfo ? () => setActiveInfo(false) : ""}>
                 <div className="BlockInfo">
-                    <p>Block #{index}</p>
-                    <p>Address: {info.address}</p>
-                    <p>Winning Miner: {info.winnerIndex + 1}</p>
-                    <p>Nonce: {info.nonce}</p>
-                    <p>Transations: </p>
-                    {info.transactions.map(t => {
-                        return <p>{t.transactionId}</p>
-                    })}
+
+                    <div id="block-x" onClick={() => setActiveInfo(false)}>x</div>
+                    <h2>Block #{index + 1}</h2>
+                    <div className="BlockTable">
+                        <p>Address: {info.address}</p>
+                        <p>Previous Address: {info.prevAddress}</p>
+                        <p>Winning Miner: {info.winnerIndex + 1}</p>
+                        <p>Nonce: {info.nonce}</p>
+                    </div>
+                    <h4 id="block-transactions">Transactions</h4>
+                    <div className="Transactions-Div">
+                        {info.transactions.map((t, index) => {
+                        return (
+                            <div className="Transactions-Row">
+                                <p>({index}):</p>
+                                <p>Transaction-id: {t.transactionId}</p>
+                                <p>Receive-Address: {t.receiveAddress}</p>
+                                <p>Send-Address: {t.receiveAddress}</p>
+                                <p>Btc-Amount: {t.btcAmount}</p>
+                            </div>
+                            )
+                        })}
+                    </div>
                 </div>
             </div> : ""}
         </>

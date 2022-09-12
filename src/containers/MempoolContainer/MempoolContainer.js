@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import './MempoolContainer.css';
 import Transaction from '../../components/Transaction/Transaction';
 
@@ -7,6 +7,7 @@ const MempoolContainer = ({inProgress, transactions, setTransactions}) => {
     const [memory, setMemory] = useState(transactions);
     const [intervalId, setIntervalId] = useState(null);
     const [time, setTime] = useState(0);
+    const [countMounted, setCountMounted] = useState(0)
 
     useEffect(()=> {
         setMemory(transactions)
@@ -23,9 +24,19 @@ const MempoolContainer = ({inProgress, transactions, setTransactions}) => {
     }, [])
 
     useEffect(() => {
-        const newTransaction = generateTransaction();
-        setMemory([ ...memory, newTransaction]);
-        setTransactions([ ...memory, newTransaction]);
+        if (countMounted >= 1) {
+            const newTransaction = generateTransaction();
+            const availableTransactions = [ ...memory, newTransaction ];
+            const sortedTransactions = availableTransactions.sort((a, b) => b.transactionFee - a.transactionFee);
+            //setMemory([ ...memory, newTransaction]);
+            //setTransactions([ ...memory, newTransaction]);
+            setMemory(sortedTransactions);
+            setTransactions(sortedTransactions);
+        } else {
+            //isMounted.current = true;
+            let newVal = countMounted + 1;
+            setCountMounted(newVal);
+        }
     }, [time])
 
     function ticktock() {
@@ -42,13 +53,13 @@ const MempoolContainer = ({inProgress, transactions, setTransactions}) => {
             transactionId: Math.floor(Math.random() * 1000),
             receiveAddress: Math.floor(Math.random() * 100000),
             sendAddress: Math.floor(Math.random() * 100000),
-            btcAmount: Math.floor(Math.random()),
-            transactionFee: Math.floor(Math.random() * 2)
+            btcAmount: Math.random().toFixed(4),
+            transactionFee: (Math.random() * 2).toFixed(4)
         }
         return newTrans;
     }
 
-    function generateTransactions() {
+    /*function generateTransactions() {
         console.log("Generating...")
         let newCount = 0;
         let transArray = [];
@@ -66,7 +77,7 @@ const MempoolContainer = ({inProgress, transactions, setTransactions}) => {
         setMemory(transArray);
 
         setIntervalId(intId);
-    }
+    }*/
 
     return (
         <div className="MempoolContainer">
