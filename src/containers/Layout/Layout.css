@@ -32,15 +32,16 @@
     margin: 0px 5px 0 5px;
     height: 30px;
     width: 100px;
-    font-size: 18px;
-    border-radius: 10px;
+    font-size: 16px;
+    border-radius: 20px;
     font-weight: bold;
     border: none;
     background-color: gainsboro;
 }
 
 .StartButton:hover, .StopButton:hover {
-    background-color: rgb(37,139,208);
+    background-color: #e83e8c;
+    color: white;
     transform: scale(1.1);
     cursor: pointer;
 }

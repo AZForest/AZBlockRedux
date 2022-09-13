@@ -1,14 +1,15 @@
 .Transaction {
     width: 95%;
-    height: 20px;
     background-color: #002b36;
     margin: 5px auto;
     color: gainsboro;
     display: flex;
     font-size: 12px;
     justify-content: space-between;
-    padding: auto 5px;
+    align-content: center;
+    padding: 5px 5px;
     border-radius: 5px;
+    font-weight: 700;
 }
 
 .Transaction p {

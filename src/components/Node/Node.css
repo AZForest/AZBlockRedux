@@ -9,8 +9,8 @@
 }
 
 .Node:hover {
-    transform: scale(1.01);
-    box-shadow: 0 0 10px rgb(21,96,137);
+    transform: scale(1.005);
+    box-shadow: 0 0 5px rgba(131,147,150, 1);
 }
 
 .Node h3 {

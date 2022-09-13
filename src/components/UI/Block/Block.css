@@ -3,7 +3,6 @@
     height: 30px;
     background-color: rgba(37,139,209, 1);
     margin: auto 10px;
-    z-index: 3;
     display: flex;
     justify-content: center;
     border-radius: 5px;
@@ -11,6 +10,10 @@
 }
 .Block:first-of-type {
     margin-left: 20px;
+}
+.Block:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 

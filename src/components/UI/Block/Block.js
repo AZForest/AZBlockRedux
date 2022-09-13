@@ -10,13 +10,14 @@ function Block({index, info}) {
         backgroundColor: colors.primary
     }
 
+    //onClick={activeInfo ? () => setActiveInfo(false) : ""}
     return (
         <>
             <div className="Block" onClick={() => setActiveInfo(!activeInfo)} style={backgroundColor}>
                 <div id="BlockWinner">{info.winnerIndex + 1}</div>
             </div>
             {activeInfo ? 
-            <div className="BlockBg" onClick={activeInfo ? () => setActiveInfo(false) : ""}>
+            <div className="BlockBg" >
                 <div className="BlockInfo">
 
                     <div id="block-x" onClick={() => setActiveInfo(false)}>x</div>

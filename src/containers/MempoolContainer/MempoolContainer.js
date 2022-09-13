@@ -44,7 +44,7 @@ const MempoolContainer = ({inProgress, transactions, setTransactions}) => {
         let intId = setInterval(() => {
             setTime(i);
             i++;
-        }, 500)
+        }, 800)
         setIntervalId(intId);
     }
 

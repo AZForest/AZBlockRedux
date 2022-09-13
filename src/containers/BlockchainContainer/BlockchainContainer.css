@@ -5,7 +5,9 @@
     align-content: right;
     background-color: #093642;
     margin: 0px auto 10px auto;
-    overflow-x: scroll;
+    overflow-x: visible;
+    overflow-y: hidden;
+    box-sizing: border-box;
 }
 
 .block-row {

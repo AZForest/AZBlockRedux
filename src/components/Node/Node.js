@@ -6,8 +6,8 @@ import colors from '../../utility/GlobalVars';
 
 function Node({id, progress, buildProgress, inProgress, guess, mining, didWin, balance}) { 
     const winBox = {
-        backgroundColor: colors.primary,
-        boxShadow: "0px 0px 20px " + colors.primary
+        backgroundColor: colors.secondary,
+        boxShadow: "0px 0px 20px " + colors.secondary
     }
     return (
         <div className="Node" style={didWin && !inProgress ? winBox : {border: "none"}}>

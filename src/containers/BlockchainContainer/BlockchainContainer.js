@@ -6,11 +6,25 @@ import colors from '../../utility/GlobalVars';
 function BlockchainContainer({winnerNode, blocks}) {
     const [currentWinner, setCurrentWinner] = useState(winnerNode);
     const [blocksArray, setBlocksArray] = useState(blocks);
+    const [borderActive, setBorderActive] = useState(false);
+
+    useEffect(() => {
+        if (winnerNode.id != null) {
+            setBorderActive(true);
+            setTimeout(() => {
+                setBorderActive(false);
+            }, 3000)
+        }
+    }, [winnerNode])
 
     useEffect(() => {
         //console.log(blocksArray);
         setBlocksArray(blocks);
     },[blocks])
+
+    const rotatingBorder = {
+        border: "2px dashed " + colors.primary
+    }
 
     const backgroundColor = {
         color: colors.primary
@@ -19,7 +33,7 @@ function BlockchainContainer({winnerNode, blocks}) {
     return (
         <>
             <br/>
-            <div className="BlockchainContainer">
+            <div className="BlockchainContainer" style={borderActive ? rotatingBorder : {border: "none"}}>
                 {blocksArray.map((block, index) => {
                     return (
                     <div className="block-row" key={index} >

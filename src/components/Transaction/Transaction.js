@@ -5,8 +5,8 @@ import colors from '../../utility/GlobalVars'
 
 function Transaction({ info, index, inProgress }) {
     const selected = {
-        backgroundColor: colors.primary,
-        //boxShadow: "0 0 20px rgb(37,139,209)"
+        backgroundColor: "rgba(131,147,150, 0.4)",
+        //boxShadow: "0 0 20px " + colors.primary
     }
     const notSelected = {
         backgroundColor: "#002b36",
