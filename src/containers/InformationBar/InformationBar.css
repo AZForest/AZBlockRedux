@@ -9,6 +9,8 @@
     justify-content: center;
     text-align: center;
     color: gainsboro;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .InformationBar h3 {

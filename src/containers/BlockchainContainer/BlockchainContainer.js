@@ -38,7 +38,7 @@ function BlockchainContainer({winnerNode, blocks}) {
                     return (
                     <div className="block-row" key={index} >
                         <Block key={index} index={index} info={block}/>
-                        <p className="arrow" style={backgroundColor}>-{'>'}</p>
+                        <p className="arrow" style={backgroundColor}>-</p>
                     </div>
                     )
                 })}

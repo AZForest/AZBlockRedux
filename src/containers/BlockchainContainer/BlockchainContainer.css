@@ -8,10 +8,13 @@
     overflow-x: visible;
     overflow-y: hidden;
     box-sizing: border-box;
+    border-radius: 5px;
+    padding-left: 10px;
 }
 
 .block-row {
     display: flex;
+    margin: 0 0px;
 }
 
 .arrow {

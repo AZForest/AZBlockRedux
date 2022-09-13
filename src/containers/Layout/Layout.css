@@ -1,5 +1,6 @@
 .Layout {
     background-color: #002b36;
+    font-family: 'Noto Sans', sans-serif;
 }
 
 #title {
@@ -20,6 +21,7 @@
     background-color: #093642;
     width: 1000px;
     margin: 20px auto 0 auto;
+    border-radius: 5px;
 }
 
 .StartButtonContainer {
@@ -37,6 +39,7 @@
     font-weight: bold;
     border: none;
     background-color: gainsboro;
+    font-family: 'Noto Sans', sans-serif;
 }
 
 .StartButton:hover, .StopButton:hover {

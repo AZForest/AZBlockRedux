@@ -23,7 +23,7 @@ function Node({id, progress, buildProgress, inProgress, guess, mining, didWin, b
                 </div>
                 
             </div>  
-            {didWin && !inProgress ? <p id="AddingNewBlock">Adding new Block ...</p> : <p id="Mining">Mining...</p>}
+            {didWin && !inProgress ? <p id="AddingNewBlock">Broadcasting ...</p> : <p id="Mining">Mining...</p>}
             {didWin && !inProgress ? 
             <ProgressBar progress={buildProgress} bgColor={colors.primary} fillColor={"gainsboro"} textColor={colors.primary}/> : 
             <ProgressBar progress={progress} bgColor={"gainsboro"} fillColor={colors.primary} textColor={"gainsboro"}/>}

@@ -28,7 +28,6 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
           checkGuesses();
           setNonce(nonce + 1);
         } else {
-          //isMounted.current = true;
           let newVal = countMounted + 1;
           setCountMounted(newVal);
         }
@@ -144,9 +143,6 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
                 id: correctGuessIndex,
                 BTC: winner.BTC + 5,
             })
-
-            
-            
             
             let newBlock = {
                 prevAddress: prevWinner.hash,
@@ -156,29 +152,20 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
                 transactions: topTransactions
             }
             let currBlocks = [...blocks, newBlock];
-            //console.log(currBlocks);
             setBuilding(true);
             setTimeout(() => {
                 setTransactions(transactions.slice(10));
                 setBlocks(currBlocks);
                 setBuilding(false);
-                setInProgress(true);
                 resetGuesses();
+                setInProgress(true);
             }, 3000)
 
-            /*setModalActive(true);
-            setTimeout(() => {
-                setModalActive(false)
-            }, 5000);*/
         }
     }
 
     return (
         <div className="NodeContainer">
-            {/*<Node id={0} progress={barProgress} inProgress={inProgress} buildProgress={buildBarProgress} guess={guesses[0]} mining={inProgress} didWin={0 == winnerNode.id} balance={nodes[0].BTC}/>
-            <Node id={1} progress={barProgress} inProgress={inProgress} buildProgress={buildBarProgress} guess={guesses[1]} mining={inProgress} didWin={1 == winnerNode.id} balance={nodes[1].BTC}/>
-            <Node id={2} progress={barProgress} inProgress={inProgress} buildProgress={buildBarProgress} guess={guesses[2]} mining={inProgress} didWin={2 == winnerNode.id} balance={nodes[2].BTC}/>
-            <Node id={3} progress={barProgress} inProgress={inProgress} buildProgress={buildBarProgress} guess={guesses[3]} mining={inProgress} didWin={3 == winnerNode.id} balance={nodes[3].BTC}/>*/}
             {nodes.map((n, index) => {
                 return <Node key={index}
                         id={index} 

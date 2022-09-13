@@ -6,4 +6,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }

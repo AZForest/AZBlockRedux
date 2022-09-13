@@ -7,7 +7,7 @@ import MempoolContainer from '../MempoolContainer/MempoolContainer';
 import Modal from '../../components/UI/Modal/Modal';
 
 function Layout() {
-    const [target, setTarget] = useState(0);
+    const [target, setTarget] = useState(-1);
     const [inProgress, setInProgress] = useState(false);
     const [winnerNode, setWinnerNode] = useState({
         id: null,
@@ -31,7 +31,6 @@ function Layout() {
         {id: 7, BTC: 0},
         {id: 8, BTC: 0},
     ])
-    const [modalActive, setModalActive] = useState(false);
     const [blocks, setBlocks] = useState([])
     const [transactions, setTransactions] = useState([]);
 
@@ -64,19 +63,8 @@ function Layout() {
         return highest;
     }
 
-    function toggleModal() {
-        setModalActive(true)
-        setTimeout(() => {
-            setModalActive(false)
-        }, 7000)
-    }
-
     return (
         <div className="Layout">
-            {modalActive ? <Modal 
-                            winnerNode={winnerNode}
-                            target={target}
-                            nonce={nonce}/> : ""}
             <h4 id="title">Blockchain Simulator</h4>
             <BlockchainContainer winnerNode={winnerNode} blocks={blocks}/>
             <div className="MidContainer">
@@ -93,7 +81,6 @@ function Layout() {
                         setNonce={setNonce}
                         nodes={nodes}
                         setNodes={setNodes}
-                        setModalActive={setModalActive}
                         blocks={blocks}
                         setBlocks={setBlocks}
                         transactions={transactions}
@@ -105,7 +92,6 @@ function Layout() {
                 <button className="StopButton" onClick={() => setInProgress(false)}>Stop</button>
             </div>
             <MempoolContainer inProgress={inProgress} transactions={transactions} setTransactions={setTransactions}/>
-            <button onClick={() => toggleModal()}>1</button>
             <br/>
             <br/>
         </div>

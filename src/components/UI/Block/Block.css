@@ -8,9 +8,9 @@
     border-radius: 5px;
     font-weight: 700;
 }
-.Block:first-of-type {
+/*.Block:first-of-type {
     margin-left: 20px;
-}
+}*/
 .Block:hover {
     cursor: pointer;
     transform: scale(1.1);

@@ -25,7 +25,7 @@ function ProgressBar({progress, bgColor, fillColor, textColor}) {
         padding: 0,
         color: textColor,
         fontWeight: 700,
-        fontSize: "12px",
+        fontSize: "14px",
         margin: 0
 
       }
