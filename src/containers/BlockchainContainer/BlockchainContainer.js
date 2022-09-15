@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import './BlockchainContainer.css';
 import Block from '../../components/UI/Block/Block';
 import colors from '../../utility/GlobalVars';
 
-function BlockchainContainer({winnerNode, blocks}) {
-    const [currentWinner, setCurrentWinner] = useState(winnerNode);
-    const [blocksArray, setBlocksArray] = useState(blocks);
+function BlockchainContainer() {
+
+    const winnerNode = useSelector(state => state.winnerNode);
+    const blocks = useSelector(state => state.blocks);
+    //const [blocksArray, setBlocksArray] = useState(blocks);
     const [borderActive, setBorderActive] = useState(false);
 
     useEffect(() => {
@@ -17,10 +20,9 @@ function BlockchainContainer({winnerNode, blocks}) {
         }
     }, [winnerNode])
 
-    useEffect(() => {
-        //console.log(blocksArray);
+    /*useEffect(() => {
         setBlocksArray(blocks);
-    },[blocks])
+    },[blocks])*/
 
     const rotatingBorder = {
         border: "2px dashed " + colors.primary
@@ -34,7 +36,7 @@ function BlockchainContainer({winnerNode, blocks}) {
         <>
             <br/>
             <div className="BlockchainContainer" style={borderActive ? rotatingBorder : {border: "none"}}>
-                {blocksArray.map((block, index) => {
+                {blocks.map((block, index) => {
                     return (
                     <div className="block-row" key={index} >
                         <Block key={index} index={index} info={block}/>

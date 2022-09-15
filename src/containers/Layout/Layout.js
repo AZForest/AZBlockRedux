@@ -1,26 +1,36 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './Layout.css';
 import NodeContainer from '../NodeContainer/NodeContainer';
 import BlockchainContainer from '../BlockchainContainer/BlockchainContainer';
 import InformationBar from '../InformationBar/InformationBar';
 import MempoolContainer from '../MempoolContainer/MempoolContainer';
-import Modal from '../../components/UI/Modal/Modal';
+import * as actionTypes from '../../store/actions';
+
 
 function Layout() {
-    const [target, setTarget] = useState(-1);
-    const [inProgress, setInProgress] = useState(false);
-    const [winnerNode, setWinnerNode] = useState({
+    const dispatch = useDispatch();
+    const inProgress = useSelector(state => state.inProgress);
+    const setHighestFundsIndex = (index) => {
+        dispatch({ type: actionTypes.SET_HIGHEST_FUNDS_INDEX, newIndex: index });
+    }
+    const nodes = useSelector(state => state.nodes);
+    const setNonce = () => {
+        dispatch({ type: actionTypes.SET_NONCE, newNonce: 0 });
+    }
+    //const [target, setTarget] = useState(-1);
+    //const [inProgress, setInProgress] = useState(false);
+    /*const [winnerNode, setWinnerNode] = useState({
         id: null,
         BTC: null,
         previousHash: null
-    });
-    //const [winnerNode, setWinnerNode] = useState(null);
-    const [highestFunds, setHighestFunds] = useState({
+    });*/
+    /*const [highestFunds, setHighestFunds] = useState({
         id: 0,
         BTC: 0
-    })
-    const [nonce, setNonce] = useState(0);
-    const [nodes, setNodes] = useState([
+    })*/
+    //const [nonce, setNonce] = useState(0);
+    /*const [nodes, setNodes] = useState([
         {id: 0, BTC: 0},
         {id: 1, BTC: 0},
         {id: 2, BTC: 0},
@@ -30,68 +40,57 @@ function Layout() {
         {id: 6, BTC: 0},
         {id: 7, BTC: 0},
         {id: 8, BTC: 0},
-    ])
-    const [blocks, setBlocks] = useState([])
+    ])*/
+    //const [blocks, setBlocks] = useState([])
     const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
         if (inProgress) {
-            refreshTarget()
+            setTarget()
         } 
     }, [inProgress])
 
     useEffect(() => {
-        setHighestFunds(getHighestBTC());
+        setHighestFundsIndex(getHighestFundsIndex());
         setTimeout(() => {
             setNonce(0);
         }, 3000)
     }, [nodes])
 
-    function refreshTarget() {
-        let temp = Math.floor(Math.random() * 20);
-        setTarget(temp);
+    const setTarget = () => {
+        let temp = Math.floor(Math.random() * 10);
+        dispatch({ type: actionTypes.SET_TARGET, newTarget: temp })
     }
 
-    function getHighestBTC() {
-        let highest = {id: 0, BTC: 0};
-        let val = -1;
-        nodes.forEach(node => {
-            if (node.BTC > highest.BTC) {
-                highest = node;
+    const setInProgress = (value) => {
+        dispatch({ type: actionTypes.SET_IN_PROGRESS, newProgress: value });
+    }
+
+    function getHighestFundsIndex() {
+        let highest = 0;
+        let highestIndex = -1;
+        nodes.forEach((node, i) => {
+            if (node.BTC > highest) {
+                highest = node.BTC;
+                highestIndex = i;
             }
         })
-        return highest;
+        return highest === 0 ? -1 : highestIndex;
     }
 
     return (
         <div className="Layout">
             <h4 id="title">Blockchain Simulator</h4>
-            <BlockchainContainer winnerNode={winnerNode} blocks={blocks}/>
+            <BlockchainContainer />
             <div className="MidContainer">
-                <InformationBar target={target} 
-                                winnerNode={winnerNode.id}
-                                nonce={nonce}
-                                highest={highestFunds}/>
-                <NodeContainer address={target} 
-                        inProgress={inProgress} 
-                        setInProgress={setInProgress}
-                        winnerNode={winnerNode}
-                        setWinnerNode={setWinnerNode}
-                        nonce={nonce}
-                        setNonce={setNonce}
-                        nodes={nodes}
-                        setNodes={setNodes}
-                        blocks={blocks}
-                        setBlocks={setBlocks}
-                        transactions={transactions}
-                        setTransactions={setTransactions}/>
+                <InformationBar />
+                <NodeContainer />
             </div>
-            
             <div className="StartButtonContainer">
                 <button className="StartButton" onClick={() => setInProgress(true)}>Start</button>
                 <button className="StopButton" onClick={() => setInProgress(false)}>Stop</button>
             </div>
-            <MempoolContainer inProgress={inProgress} transactions={transactions} setTransactions={setTransactions}/>
+            <MempoolContainer />
             <br/>
             <br/>
         </div>

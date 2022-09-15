@@ -1,9 +1,44 @@
 import React, {useEffect, useState, useLayoutEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import './NodeContainer.css';
 import Node from '../../components/Node/Node';
+import * as actionTypes from '../../store/actions';
 
-function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinnerNode, nonce, setNonce, nodes, setNodes, blocks, setBlocks, transactions, setTransactions}) {
+function NodeContainer() {
     
+    const dispatch = useDispatch();
+    const target = useSelector(state => state.target);
+
+    const inProgress = useSelector(state => state.inProgress);
+    const setInProgress = (val) => {
+        dispatch({ type: actionTypes.SET_IN_PROGRESS, newProgress: val });
+    }
+
+    const winnerNode = useSelector(state => state.winnerNode);
+    const setWinnerNode = (winner) => {
+        dispatch({ type: actionTypes.SET_WINNER_NODE, newWinner: winner });
+    }
+
+    const nonce = useSelector(state => state.nonce);
+    const setNonce = (value) => {
+        dispatch({ type: actionTypes.SET_NONCE, newNonce: value })
+    }
+
+    const nodes = useSelector(state => state.nodes);
+    const setNodes = (newN) => {
+        dispatch({ type: actionTypes.SET_NODES, newNodes: newN });
+    }
+
+    const blocks = useSelector(state => state.blocks);
+    const setBlocks = (newBlocks) => {
+        dispatch({ type: actionTypes.SET_BLOCKS, newBlocks: newBlocks });
+    }
+
+    const transactions = useSelector(state => state.transactions);
+    const setTransactions = (newT) => {
+        dispatch({ type: actionTypes.SET_TRANSACTIONS, newTransactions: newT });
+    }
+
     const initialGuesses = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     
     const [barProgress, setBarProgress] = useState(0);
@@ -66,7 +101,7 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
     }
 
     const generateGuess = () => {
-        return Math.floor(Math.random() * 20);
+        return Math.floor(Math.random() * 10);
     }
 
     const generateGuesses = () => {
@@ -115,7 +150,7 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
         let correctGuessIndex = -1;
         for (let i = 0; i < guesses.length; i++) {
             //console.log("Guess: "  + guesses[i] + ". Target: " + address)
-            if (guesses[i] == address) correctGuessIndex = i;
+            if (guesses[i] == target) correctGuessIndex = i;
         }
         if (correctGuessIndex > -1) {
             setInProgress(false);
@@ -129,7 +164,17 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
             //console.log(prevWinner.hash);
             console.log(newHash);
             let currNodes = [...nodes];
-            let winner = currNodes[correctGuessIndex];
+            let preWinner = currNodes[correctGuessIndex];
+            let uWinner = {
+                previousHash: prevWinner.hash,
+                hash: newHash,
+                id: preWinner.id,
+                BTC: preWinner.BTC + 5
+            }
+            currNodes[correctGuessIndex] = uWinner;
+            setNodes(currNodes);
+            setWinnerNode(uWinner);
+            /*let winner = currNodes[correctGuessIndex];
             currNodes[correctGuessIndex] = {
                 previousHash: prevWinner.hash,
                 hash: newHash,
@@ -137,12 +182,14 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
                 BTC: winner.BTC + 5
             }
             setNodes(currNodes);
+
             setWinnerNode({
                 previousHash: prevWinner.hash,
                 hash: newHash,
                 id: correctGuessIndex,
                 BTC: winner.BTC + 5,
-            })
+            })*/
+            
             
             let newBlock = {
                 prevAddress: prevWinner.hash,
@@ -160,7 +207,6 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
                 resetGuesses();
                 setInProgress(true);
             }, 3000)
-
         }
     }
 
@@ -174,7 +220,7 @@ function NodeContainer({address, inProgress, setInProgress, winnerNode, setWinne
                         buildProgress={buildBarProgress} 
                         guess={guesses[index]} 
                         mining={inProgress} 
-                        didWin={index == winnerNode.id} 
+                        didWin={index == winnerNode.id}
                         balance={nodes[index].BTC}/>
             })}
         </div>

@@ -1,9 +1,17 @@
 import React, { useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './MempoolContainer.css';
 import Transaction from '../../components/Transaction/Transaction';
+import * as actionTypes from '../../store/actions';
 
-const MempoolContainer = ({inProgress, transactions, setTransactions}) => {
+const MempoolContainer = () => {
 
+    const dispatch = useDispatch();
+    const inProgress = useSelector(state => state.inProgress);
+    const transactions = useSelector(state => state.transactions);
+    const setTransactions = (newT) => {
+        dispatch({ type: actionTypes.SET_TRANSACTIONS, newTransactions: newT });
+    }
     const [memory, setMemory] = useState(transactions);
     const [intervalId, setIntervalId] = useState(null);
     const [time, setTime] = useState(0);
@@ -17,11 +25,6 @@ const MempoolContainer = ({inProgress, transactions, setTransactions}) => {
         if (inProgress) ticktock();
         else clearInterval(intervalId);
     }, [inProgress])
-
-    useEffect(() => {
-        //generateTransactions();
-        //ticktock();
-    }, [])
 
     useEffect(() => {
         if (countMounted >= 1) {
